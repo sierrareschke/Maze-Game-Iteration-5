@@ -1,6 +1,6 @@
 # OOAD Homework 6:
 ## Adding the Encapsulation and BDD to Polymorphia
-#### (40 points)
+#### (55 points)
 
 TODO:
 Room encapsulation can be done via package protected (not really, as we can add any class to that package), an inner class of the Maze (so that we can use the private methods), or we can make the objects immutable (return deep copy of Maze), or have the Maze handle the contents of each room internally.
