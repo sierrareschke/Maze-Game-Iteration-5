@@ -1,6 +1,7 @@
 package csci.ooad.polymorphia.stepdefs
 
 import csci.ooad.polymorphia.Maze
+import csci.ooad.polymorphia.Polymorphia
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 
@@ -24,16 +25,17 @@ class MazeStepDefs {
             * number of demons
             * number of food items
         */
-        int numRooms = gameAttributes.get("number of rooms")
-        int numAdventurers = gameAttributes.get("number of adventurers")
-        int numKnights = gameAttributes.get("number of knights")
-        int numCowards = gameAttributes.get("number of cowards")
-        int numGluttons = gameAttributes.get("number of gluttons")
-        int numCreatures = gameAttributes.get("number of creatures")
-        int numDemons = gameAttributes.get("number of demons")
-        int numFoodItems = gameAttributes.get("number of food items")
+        int numRooms = gameAttributes.getOrDefault("number of rooms", 0);
+        int numAdventurers = gameAttributes.getOrDefault("number of adventurers", 0);
+        int numKnights = gameAttributes.getOrDefault("number of knights", 0);
+        int numCowards = gameAttributes.getOrDefault("number of cowards", 0);
+        int numGluttons = gameAttributes.getOrDefault("number of gluttons", 0);
+        int numCreatures = gameAttributes.getOrDefault("number of creatures", 0);
+        int numDemons = gameAttributes.getOrDefault("number of demons", 0);
+        int numFoodItems = gameAttributes.getOrDefault("number of food items", 0);
 
-        world.maze = Maze.getNewBuilder()
+
+        Maze maze = Maze.getNewBuilder()
                 .createFullyConnectedRooms(numRooms)
                 .createAndAddAdventurers(numAdventurers)
                 .createAndAddKnights(numKnights)
@@ -43,6 +45,9 @@ class MazeStepDefs {
                 .createAndAddDemons(numDemons)
                 .createAndAddFoodItems(numFoodItems)
                 .build();
+
+        Polymorphia game = new Polymorphia("gameWithAttributes", maze);
+        world.polymorphia = game;
     }
 
     @Given("a room named \"Only Room\" with no neighbors")
@@ -57,7 +62,15 @@ class MazeStepDefs {
 
     @Given("all characters are in room \"Only Roo\"")
     public placeAllCharactersInRoom(String roomName){
+    }
 
+    @Given(/^a ([A-Z][a-zA-Z]*) "([^"]+)"$/)
+    void addCharacterWithName(String typeOfCharacter, String characterName) {
+        println "Character Type: $typeOfCharacter"
+        println "Character Name: $characterName"
+
+
+        // Additional code for adding the character can go here
     }
 
     @Then("a fight took place")

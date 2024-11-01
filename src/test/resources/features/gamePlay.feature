@@ -38,3 +38,7 @@ Feature: # Enter feature name here
 
       Then a fight took place
       And creature lost some health
+
+
+    Scenario: Coward created
+      Given a Coward "Sir Run Away"
