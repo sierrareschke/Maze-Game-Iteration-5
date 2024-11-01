@@ -7,6 +7,9 @@ import csci.ooad.polymorphia.characters.Character;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.*;
 
 
 public class Room {
@@ -28,7 +31,8 @@ public class Room {
                 .filter(Character::isAdventurer)
                 .filter(Character::isAlive)
                 .map(Adventurer.class::cast)
-                .sorted().toList();
+                .sorted()
+                .toList();
     }
 
     public List<Creature> getLivingCreatures() {
@@ -47,19 +51,18 @@ public class Room {
         contents.addAll(this.foodItems.stream()
                 .map(Object::toString)
                 .toList());
-        return contents;
+        return unmodifiableList(contents);
     }
 
-    public void addNeighbor(Room neighbor) {
+    private void addNeighbor(Room neighbor) {
         // Make sure we are never a neighbor of ourselves
         assert this != neighbor;
         this.neighbors.add(neighbor);
     }
 
-    public Room connect(Room neighbor) {
+    public void connect(Room neighbor) {
         this.addNeighbor(neighbor);
         neighbor.addNeighbor(this);
-        return this;
     }
 
     @Override
