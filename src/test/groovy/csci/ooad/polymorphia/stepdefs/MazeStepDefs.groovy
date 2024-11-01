@@ -43,7 +43,6 @@ class MazeStepDefs {
                 .createAndAddDemons(numDemons)
                 .createAndAddFoodItems(numFoodItems)
                 .build();
-        //world.createMaze(gameAttributes)
     }
 
     @Given("a room named \"Only Room\" with no neighbors")
