@@ -24,6 +24,26 @@ class MazeStepDefs {
             * number of demons
             * number of food items
         */
+        int numRooms = gameAttributes.get("number of rooms")
+        int numAdventurers = gameAttributes.get("number of adventurers")
+        int numKnights = gameAttributes.get("number of knights")
+        int numCowards = gameAttributes.get("number of cowards")
+        int numGluttons = gameAttributes.get("number of gluttons")
+        int numCreatures = gameAttributes.get("number of creatures")
+        int numDemons = gameAttributes.get("number of demons")
+        int numFoodItems = gameAttributes.get("number of food items")
+
+        world.maze = Maze.getNewBuilder()
+                .createFullyConnectedRooms(numRooms)
+                .createAndAddAdventurers(numAdventurers)
+                .createAndAddKnights(numKnights)
+                .createAndAddCowards(numCowards)
+                .createAndAddGluttons(numGluttons)
+                .createAndAddCreatures(numCreatures)
+                .createAndAddDemons(numDemons)
+                .createAndAddFoodItems(numFoodItems)
+                .build();
+        //world.createMaze(gameAttributes)
     }
 
     @Given("a room named \"Only Room\" with no neighbors")
