@@ -2,29 +2,30 @@ package csci.ooad.polymorphia.stepdefs
 
 import csci.ooad.polymorphia.Maze
 import csci.ooad.polymorphia.Polymorphia
+import io.cucumber.java.Before
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 
 class MazeStepDefs {
+    Maze maze
     World world
+    Maze.Builder mazeBuilder;
 
-
-    MazeStepDefs(World aWorld) {
-        world = aWorld
+    MazeStepDefs(World world) {
+        this.world = world
     }
+
+    // Step 1: Initialize MazeBuilder before all @Given steps
+    @Before(order = 0)
+    void setupMazeBuilder() {
+        mazeBuilder = Maze.getNewBuilder().create2x2Grid()
+        System.out.println("Setup maze builder")
+    }
+
 
     @Given("I have a maze with the following attributes:")
     public void iHaveAGameWithTheFollowingAttributes(Map<String, Integer> gameAttributes) {
-        /* GAME ATTRIBUTES:
-            * number of rooms
-            * number of adventurers
-            * number of knights
-            * number of cowards
-            * number of gluttons
-            * number of creatures
-            * number of demons
-            * number of food items
-        */
+
         int numRooms = gameAttributes.getOrDefault("number of rooms", 0);
         int numAdventurers = gameAttributes.getOrDefault("number of adventurers", 0);
         int numKnights = gameAttributes.getOrDefault("number of knights", 0);
@@ -34,9 +35,7 @@ class MazeStepDefs {
         int numDemons = gameAttributes.getOrDefault("number of demons", 0);
         int numFoodItems = gameAttributes.getOrDefault("number of food items", 0);
 
-
-        Maze maze = Maze.getNewBuilder()
-                .createFullyConnectedRooms(numRooms)
+        mazeBuilder.createFullyConnectedRooms(numRooms)
                 .createAndAddAdventurers(numAdventurers)
                 .createAndAddKnights(numKnights)
                 .createAndAddCowards(numCowards)
@@ -44,24 +43,21 @@ class MazeStepDefs {
                 .createAndAddCreatures(numCreatures)
                 .createAndAddDemons(numDemons)
                 .createAndAddFoodItems(numFoodItems)
-                .build();
 
-        Polymorphia game = new Polymorphia("gameWithAttributes", maze);
-        world.polymorphia = game;
+        System.out.println("Maze with attributes")
     }
 
-    @Given("a room named \"Only Room\" with no neighbors")
-    public createRoomWithNoNeighbors(String roomName){
-        myMaze = Maze.getNewBuilder()
-                .create2x2Grid()
-                .createAndAddAdventurers("Frodo")
-                .createAndAddCreatures("Ogre")
-                .createAndAddFoodItems("Cookie")
-                .build();
+    @Given("a room named \"([^\"]+)\" with no neighbors")
+    public createRoomWithNoNeighbors(String roomName) {
+        // TODO
+        println "Room Name: $roomName"
+        System.out.println("Room with no neighbors")
     }
 
-    @Given("all characters are in room \"Only Roo\"")
-    public placeAllCharactersInRoom(String roomName){
+    @Given("all characters are in room \"([^\"]+)\"")
+    public placeAllCharactersInRoom(String roomName) {
+        // TODO
+        System.out.println("Place characters in a room")
     }
 
     @Given(/^a ([A-Z][a-zA-Z]*) "([^"]+)"$/)
@@ -69,11 +65,41 @@ class MazeStepDefs {
         println "Character Type: $typeOfCharacter"
         println "Character Name: $characterName"
 
+        switch (typeOfCharacter) {
+            case 'Coward':
+                mazeBuilder.createAndAddCowards(new String[]{characterName});
+                break;
+            case 'Glutton':
+                mazeBuilder.createAndAddGluttons(characterName);
+                break;
+            case 'Adventurer':
+                mazeBuilder.createAndAddAdventurers(characterName);
+                break;
+            case 'Knight':
+                mazeBuilder.createAndAddKnights(characterName);
+                break;
+            case 'Creature':
+                mazeBuilder.createAndAddCreatures(characterName);
+                break;
+            case 'Demon':
+                mazeBuilder.createAndAddDemons(characterName);
+                break;
+            default:
+                System.out.println("Unknown character type: " + typeOfCharacter);
+                break;
+        }
 
-        // Additional code for adding the character can go here
+        System.out.println("Add character with name")
+
     }
 
-    @Then("a fight took place")
-    public void fightOutcome(){}
+    // Step 2: Finalize maze with .build() after @Given but before @When
+    @Given("the maze is successfully created")
+    void finalizeMaze() {
+        maze = mazeBuilder.build();
+        world.polymorphia = new Polymorphia("Polymorphia Maze", maze);
+        System.out.println("Finalize maze")
+    }
+
 
 }
