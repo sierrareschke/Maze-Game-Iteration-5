@@ -27,7 +27,13 @@ class PolymorphiaStepDefs {
 
     @Then("the game should be over")
     void theGameShouldBeOver() {
-        assertTrue(world.polymorphia.over);
+        assertTrue(world.polymorphia.isOver());
+    }
+
+    @Then("creature lost some health")
+    public void creature_lost_some_health() {
+        // TODO - how to access creature variable and check health changed
+        throw new io.cucumber.java.PendingException();
     }
 
 }
