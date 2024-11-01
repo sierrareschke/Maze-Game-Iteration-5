@@ -12,7 +12,7 @@ class RoomTest {
     void getRandomNeighbor() {
         Room room = new Room("mainRoom");
         Room neighbor = new Room("neighbor");
-        room.addNeighbor(neighbor);
+        room.connect(neighbor);
 
         assertEquals(room.getRandomNeighbor(), neighbor);
     }

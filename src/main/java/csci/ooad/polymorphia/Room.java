@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static java.util.Collections.*;
+
 
 public class Room {
     private final String name;
@@ -24,20 +26,23 @@ public class Room {
     }
 
     public List<Adventurer> getLivingAdventurers() {
-        return characters.stream()
+        List<Adventurer> list = characters.stream()
                 .filter(Character::isAdventurer)
                 .filter(Character::isAlive)
                 .map(Adventurer.class::cast)
                 .sorted().toList();
+        list =  unmodifiableList(list);
+        return list;
     }
 
     public List<Creature> getLivingCreatures() {
-        return characters.stream()
+        List<Creature> list = characters.stream()
                 .filter(Character::isCreature)
                 .filter(Character::isAlive)
                 .map(Creature.class::cast)
                 .sorted()
                 .toList();
+        return unmodifiableList(list);
     }
 
     public List<String> getContents() {
@@ -47,19 +52,18 @@ public class Room {
         contents.addAll(this.foodItems.stream()
                 .map(Object::toString)
                 .toList());
-        return contents;
+        return unmodifiableList(contents);
     }
 
-    public void addNeighbor(Room neighbor) {
+    private void addNeighbor(Room neighbor) {
         // Make sure we are never a neighbor of ourselves
         assert this != neighbor;
         this.neighbors.add(neighbor);
     }
 
-    public Room connect(Room neighbor) {
+    public void connect(Room neighbor) {
         this.addNeighbor(neighbor);
         neighbor.addNeighbor(this);
-        return this;
     }
 
     @Override
@@ -104,9 +108,10 @@ public class Room {
     }
 
     public List<Character> getLivingCharacters() {
-        return characters.stream()
+        List<Character> list = characters.stream()
                 .filter(Character::isAlive)
                 .toList();
+        return  unmodifiableList(list);
     }
 
     public void add(Food foodItem) {
