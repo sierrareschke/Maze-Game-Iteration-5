@@ -29,6 +29,12 @@ dependencies {
     testImplementation 'org.apache.groovy:groovy:4.0.23'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17 // or VERSION_21
+    targetCompatibility = JavaVersion.VERSION_17 // or VERSION_21
+}
+
+
 test {
     useJUnitPlatform()
 }
