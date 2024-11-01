@@ -61,7 +61,7 @@ public class Maze {
         return characters;
     }
 
-    public void addToRandomRoom(Character character) {
+    void addToRandomRoom(Character character) {
         getRandomRoom().add(character);
     }
 
@@ -90,7 +90,7 @@ public class Maze {
     }
 
     public static class Builder {
-        public static String[] NAMES = new String[]{
+        private final static String[] NAMES = new String[]{
                 "Rivendell", "Mordor", "BagEnd", "Swamp", "Crystal Palace", "Pool of Lava",
                 "Stalactite Cave", "Goblin's Fountain", "Dragon's Den", "Troll Bridge",
                 "Dungeon", "Pit of Despair", "Sanctuary",
@@ -119,10 +119,10 @@ public class Maze {
             this(new CharacterFactory(), new FoodFactory());
         }
 
-        final Maze maze = new Maze();
-        Map<String, Room> roomMap = new HashMap<>();
+        private final Maze maze = new Maze();
+        private final Map<String, Room> roomMap = new HashMap<>();
 
-        public Builder(CharacterFactory characterFactory, FoodFactory foodFactory) {
+        private Builder(CharacterFactory characterFactory, FoodFactory foodFactory) {
             this.characterFactory = characterFactory;
             this.foodFactory = foodFactory;
         }
@@ -133,7 +133,7 @@ public class Maze {
             return this;
         }
 
-        public Builder createGridOfRooms(int rows, int columns, String[][] roomNames) {
+        private Builder createGridOfRooms(int rows, int columns, String[][] roomNames) {
             Room[][] roomGrid = new Room[rows][columns];
             maze.rooms = new ArrayList<>();
             // Notice -- don't use i and j. Use row and column -- they are better
@@ -232,7 +232,7 @@ public class Maze {
             return this;
         }
 
-        public Builder addAdventurers(List<Adventurer> adventurers) {
+        private Builder addAdventurers(List<Adventurer> adventurers) {
             for (Adventurer adventurer : adventurers) {
                 nextRoom().add(adventurer);
             }
@@ -265,7 +265,7 @@ public class Maze {
             return this;
         }
 
-        public Builder addCreatures(List<Creature> creatures) {
+        private Builder addCreatures(List<Creature> creatures) {
             for (Creature creature : creatures) {
                 nextRoom().add(creature);
             }
@@ -375,6 +375,6 @@ public class Maze {
     }
 
     public List<Room> getRooms() {
-        return new ArrayList<>(rooms);
+        return Collections.unmodifiableList(rooms);
     }
 }

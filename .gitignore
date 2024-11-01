@@ -2,7 +2,8 @@
 .idea/*
 /idea/
 build/
- .gradle/*
+.gradle/
+.gradle/*
 /gradle/
 .gradle/8.5/executionHistory/executionHistory.bin
 
