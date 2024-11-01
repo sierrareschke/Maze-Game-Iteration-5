@@ -7,7 +7,6 @@ import csci.ooad.polymorphia.characters.Adventurer
 class World {
     Polymorphia polymorphia
     Adventurer adventurer
-    Maze maze
 
     void createMaze(Map<String, Integer> mazeAttributes) {
 //        int numRooms = mazeAttributes.get("number of rooms")
