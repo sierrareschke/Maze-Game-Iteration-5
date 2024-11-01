@@ -39,7 +39,6 @@ Feature: # Enter feature name here
       Then a fight took place
       And creature lost some health
 
-
       # TODO - test that the behavior of the glutton, coward, knight, demon, creature, and adventurer is correct
 
       # TODO - test that glutton behavior is correct
@@ -57,3 +56,4 @@ Feature: # Enter feature name here
 
 
       # TODO - that the maze observer is notified of the correct number of death events
+

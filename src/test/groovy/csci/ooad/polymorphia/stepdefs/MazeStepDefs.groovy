@@ -64,6 +64,15 @@ class MazeStepDefs {
     public placeAllCharactersInRoom(String roomName){
     }
 
+    @Given(/^a ([A-Z][a-zA-Z]*) "([^"]+)"$/)
+    void addCharacterWithName(String typeOfCharacter, String characterName) {
+        println "Character Type: $typeOfCharacter"
+        println "Character Name: $characterName"
+
+
+        // Additional code for adding the character can go here
+    }
+
     @Then("a fight took place")
     public void fightOutcome(){}
 
