@@ -6,6 +6,7 @@ import csci.ooad.polymorphia.characters.CharacterFactory;
 import csci.ooad.polymorphia.characters.Creature;
 
 import java.util.*;
+import java.util.concurrent.locks.Condition;
 
 
 public class Maze {
@@ -42,7 +43,7 @@ public class Maze {
         for (Room room : rooms) {
             adventurers.addAll(room.getLivingAdventurers());
         }
-        return adventurers;
+        return Collections.unmodifiableList(adventurers);
     }
 
     public List<Creature> getLivingCreatures() {
@@ -50,7 +51,7 @@ public class Maze {
         for (Room room : rooms) {
             creatures.addAll(room.getLivingCreatures());
         }
-        return creatures;
+        return Collections.unmodifiableList(creatures);
     }
 
     public List<Character> getLivingCharacters() {
@@ -58,7 +59,7 @@ public class Maze {
         for (Room room : rooms) {
             characters.addAll(room.getLivingCharacters());
         }
-        return characters;
+        return Collections.unmodifiableList(characters);
     }
 
     void addToRandomRoom(Character character) {

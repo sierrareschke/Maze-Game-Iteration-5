@@ -7,6 +7,7 @@ import csci.ooad.polymorphia.characters.Character;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.*;
 
@@ -26,23 +27,21 @@ public class Room {
     }
 
     public List<Adventurer> getLivingAdventurers() {
-        List<Adventurer> list = characters.stream()
+        return characters.stream()
                 .filter(Character::isAdventurer)
                 .filter(Character::isAlive)
                 .map(Adventurer.class::cast)
-                .sorted().toList();
-        list =  unmodifiableList(list);
-        return list;
+                .sorted()
+                .toList();
     }
 
     public List<Creature> getLivingCreatures() {
-        List<Creature> list = characters.stream()
+        return characters.stream()
                 .filter(Character::isCreature)
                 .filter(Character::isAlive)
                 .map(Creature.class::cast)
                 .sorted()
                 .toList();
-        return unmodifiableList(list);
     }
 
     public List<String> getContents() {
@@ -108,10 +107,9 @@ public class Room {
     }
 
     public List<Character> getLivingCharacters() {
-        List<Character> list = characters.stream()
+        return characters.stream()
                 .filter(Character::isAlive)
                 .toList();
-        return  unmodifiableList(list);
     }
 
     public void add(Food foodItem) {
