@@ -47,16 +47,15 @@ class MazeStepDefs {
         System.out.println("Maze with attributes")
     }
 
-    @Given("a room named \"([^\"]+)\" with no neighbors")
-    public createRoomWithNoNeighbors(String roomName) {
-        // TODO
-        println "Room Name: $roomName"
+    @Given("a room named {string} with no neighbors")
+    public void createRoomWithNoNeighbors(String roomName) {
         System.out.println("Room with no neighbors")
+        mazeBuilder.createFullyConnectedRooms(roomName)
     }
 
-    @Given("all characters are in room \"([^\"]+)\"")
+    @Given("all characters are in room {string}")
     public placeAllCharactersInRoom(String roomName) {
-        // TODO
+        System.out.println(roomName)
         System.out.println("Place characters in a room")
     }
 

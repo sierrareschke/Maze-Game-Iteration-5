@@ -9,5 +9,6 @@ public enum EventType {
     Moved,
     Death,
     PickedUpSomething,
+    LostHealth,
     All
 }

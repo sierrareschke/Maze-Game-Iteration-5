@@ -45,6 +45,7 @@ public class Polymorphia implements IMazeSubject, IObservable {
         gameNumber++;
     }
 
+
     String getName() {
         return name;
     }
@@ -95,14 +96,15 @@ public class Polymorphia implements IMazeSubject, IObservable {
         turnCount += 1;
 
         // Process all the characters in random order
-        List<Character> characters = getLivingCharacters();
+        List<Character> characters = new ArrayList<>(getLivingCharacters()); // Create a modifiable copy
         while (!characters.isEmpty()) {
             int index = rand.nextInt(characters.size());
             Character currentPlayer = characters.get(index);
             currentPlayer.doAction();
-            characters.remove(index);
+            characters.remove(index); // Now this will not throw an exception
             notifyObservers(status());
         }
+
     }
 
     public List<Character> getLivingCharacters() {

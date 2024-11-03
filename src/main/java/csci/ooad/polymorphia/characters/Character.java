@@ -59,6 +59,9 @@ public abstract class Character implements Comparable<Character> {
 
         health -= healthPoints;
 
+        String lostHealthDescription = this.getName() + " just lost " + healthPoints + " points";
+        EventBus.getInstance().postMessage(EventType.LostHealth, lostHealthDescription);
+
         if (health <= 0) {
             String eventDescription = this.getName() + " just died!";
             logger.info(eventDescription);
