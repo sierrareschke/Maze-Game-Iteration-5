@@ -116,6 +116,8 @@ public abstract class Character implements Comparable<Character> {
         } else if (creatureRoll > adventurerRoll) {
             post(EventType.FightOutcome, opponent.getName() + " won a battle against " + this.getName());
             loseFightDamage(creatureRoll - adventurerRoll);
+        } else {
+            post(EventType.FightOutcome, this.getName() + " tied in a battle against " + opponent.getName());
         }
 
         loseHealth(Character.HEALTH_LOST_IN_FIGHT_REGARDLESS_OF_OUTCOME);

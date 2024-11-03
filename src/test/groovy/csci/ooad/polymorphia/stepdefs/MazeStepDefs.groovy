@@ -3,10 +3,12 @@ package csci.ooad.polymorphia.stepdefs
 import csci.ooad.polymorphia.Food
 import csci.ooad.polymorphia.Maze
 import csci.ooad.polymorphia.Polymorphia
+import csci.ooad.polymorphia.Room
 import io.cucumber.java.Before
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 
 class MazeStepDefs {
     Maze maze
@@ -49,17 +51,41 @@ class MazeStepDefs {
         System.out.println("Maze with attributes")
     }
 
-    @Given("a room named {string} with no neighbors")
-    public void createRoomWithNoNeighbors(String roomName) {
-        System.out.println("Room with no neighbors")
-        mazeBuilder.createFullyConnectedRooms(roomName)
+    @Given("a room named {string} with {int} neighbors")
+    public void createRoomWithNNeighbors(String roomName, int numNeighbors) {
+        System.out.println("Creating room with " + numNeighbors + " neighbors.");
+
+        List<String> roomNames = new ArrayList<>();
+
+        // Add the initial room name
+        roomNames.add(roomName);
+
+        // Add neighbors as "Room 1", "Room 2", etc.
+        for (int i = 1; i <= numNeighbors; i++) {
+            roomNames.add("Room " + i);
+        }
+
+        // Convert List<String> to String[] and call the builder method
+        mazeBuilder.createFullyConnectedRooms(roomNames.toArray(new String[0]));
     }
 
-    @Given("all characters are in room {string}")
-    public placeAllCharactersInRoom(String roomName) {
-        System.out.println(roomName)
-        System.out.println("Place characters in a room")
+    @When("all characters are in room {string}")
+    void placeAllCharactersInRoom(String roomName) {
+        println("Placing all characters in room: $roomName")
+
+        Room targetRoom = maze.getRoom(roomName)
+
+        // Retrieve all characters from the maze
+        List<Character> allCharacters = maze.getLivingCharacters()
+
+        // Move each character to the specified room
+        allCharacters.each { character ->
+            targetRoom.add(character)
+        }
+
+        println("All characters have been placed in room: $roomName")
     }
+
 
     @Given(/^a ([A-Z][a-zA-Z]*) "([^"]+)"$/)
     void addCharacterWithName(String typeOfCharacter, String characterName) {
@@ -71,19 +97,19 @@ class MazeStepDefs {
                 mazeBuilder.createAndAddCowards(new String[]{characterName});
                 break;
             case 'Glutton':
-                mazeBuilder.createAndAddGluttons(characterName);
+                mazeBuilder.createAndAddGluttons(new String[]{characterName});
                 break;
             case 'Adventurer':
-                mazeBuilder.createAndAddAdventurers(characterName);
+                mazeBuilder.createAndAddAdventurers(new String[]{characterName});
                 break;
             case 'Knight':
-                mazeBuilder.createAndAddKnights(characterName);
+                mazeBuilder.createAndAddKnights(new String[]{characterName});
                 break;
             case 'Creature':
-                mazeBuilder.createAndAddCreatures(characterName);
+                mazeBuilder.createAndAddCreatures(new String[]{characterName});
                 break;
             case 'Demon':
-                mazeBuilder.createAndAddDemons(characterName);
+                mazeBuilder.createAndAddDemons(new String[]{characterName});
                 break;
             default:
                 System.out.println("Unknown character type: " + typeOfCharacter);

@@ -11,13 +11,15 @@ public class Coward extends Adventurer {
 
     @Override
     Boolean shouldFight() {
-        return cannotMove();
+        // Coward should fight if it cannot move or if there is a Demon in the room
+        return cannotMove() || getCurrentLocation().hasDemon();
     }
 
     @Override
     public Boolean isCoward() {
         return true;
     }
+
 
     @Override
     public void move() {

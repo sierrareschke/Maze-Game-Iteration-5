@@ -20,7 +20,7 @@ Feature: # Enter feature name here
 
 
     Scenario: Coward will fight a Creature if he cannot run away
-      Given a room named "Only Room" with no neighbors
+      Given a room named "Only Room" with 0 neighbors
       And a Coward "Sir Run Away"
       And a Creature "Ogre"
       And all characters are in room "Only Room"

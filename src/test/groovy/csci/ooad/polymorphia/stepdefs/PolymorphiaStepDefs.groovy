@@ -3,8 +3,10 @@ package csci.ooad.polymorphia.stepdefs
 import csci.ooad.polymorphia.EventType
 import csci.ooad.polymorphia.characters.Adventurer
 import csci.ooad.polymorphia.characters.Creature
+import csci.ooad.polymorphia.observer.AteFoodObserver
 import csci.ooad.polymorphia.observer.FightObserver
 import csci.ooad.polymorphia.observer.LostHealthObserver
+import csci.ooad.polymorphia.observer.MovedObserver
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -16,12 +18,16 @@ class PolymorphiaStepDefs {
     World world
     FightObserver fightObserver = new FightObserver()
     LostHealthObserver lostHealthObserver = new LostHealthObserver()
+    AteFoodObserver ateFoodObserver = new AteFoodObserver()
+    MovedObserver moveObserver = new MovedObserver();
 
 
     PolymorphiaStepDefs(World aWorld) {
         world = aWorld
         world.polymorphia.attach(fightObserver, EventType.FightOutcome)
         world.polymorphia.attach(lostHealthObserver,EventType.LostHealth)
+        world.polymorphia.attach(ateFoodObserver,EventType.AteSomething)
+        world.polymorphia.attach(moveObserver,EventType.Moved)
     }
 
 
@@ -91,26 +97,27 @@ class PolymorphiaStepDefs {
     }
 
     // TODO - Need to figure out how to get character to eat
-    @Then("Glutton eats the food")
-    public void gluttonEatsTheFood() {
-        List<Adventurer> adventurers = world.polymorphia.getLivingAdventurers();
-        Adventurer specifiedAdventurer = adventurers.find { it.name == adventurerName }
-        world.polymorphia
-        specifiedAdventurer.doAction()
+    @Then("{string} eats the food")
+    public void gluttonEatsTheFood(String adventurerName) {
+        assertEquals(adventurerName, ateFoodObserver.getNameOfCharacterWhoAteFood(), "Expected '$adventurerName' to have eaten food, but it did not.")
+        ateFoodObserver.reset();
     }
 
     // TODO - Need to figure out how to check the room for foor
-    @Then("Glutton does not eat the food")
-    public void gluttonDoesNotEatTheFood() {
-        List<Adventurer> adventurers = world.polymorphia.getLivingAdventurers();
-        Adventurer specifiedAdventurer = adventurers.find { it.name == adventurerName }
-        world.polymorphia
-        specifiedAdventurer.doAction()
+    @Then("{string} does not eat the food")
+    public void gluttonDoesNotEatTheFood(String adventurerName) {
+        assertNotEquals(adventurerName, ateFoodObserver.getNameOfCharacterWhoAteFood(), "Expected '$adventurerName' to have not eaten food, but it did.")
+        ateFoodObserver.reset();
     }
 
-    @Then("the Coward runs")
-    public void theCowardRuns() {
-        // TODO - Implement this
+    @Then("{string} runs")
+    public void theCowardRuns(String adventurerName) {
+        String characterWhoRan = moveObserver.getNameOfCharacterWhoMoved();
+        String origin = moveObserver.getOrigin()
+        String destination = moveObserver.getDestination()
+        assertEquals(adventurerName,characterWhoRan,"Character who moved did not match $adventurerName.")
+        assertNotEquals(origin,destination,"Origin and Destination were supposed to be different, but were not.")
+        moveObserver.reset()
     }
 
     @And("all characters are in the same room")
