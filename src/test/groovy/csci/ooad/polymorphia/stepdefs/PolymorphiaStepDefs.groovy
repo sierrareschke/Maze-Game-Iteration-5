@@ -49,6 +49,13 @@ class PolymorphiaStepDefs {
         fightObserver.reset();
     }
 
+    @Then("all characters fight")
+    public void allCharactersFight() {
+        // TODO - Need to figure out how to check that all characters fought
+        assertTrue(fightObserver.hasFightOccurred(), "Expected a fight to have taken place, but no fight was observed.")
+        fightObserver.reset();
+    }
+
     @Then("I should be told that either all the adventurers or all of the creatures have died")
     void iShouldBeToldThatEitherAllTheAdventurersOrAllOfTheCreaturesHaveDied() {
         // Implement me
@@ -83,12 +90,32 @@ class PolymorphiaStepDefs {
         lostHealthObserver.nameOfCharacterWhoLostHealth()
     }
 
+    // TODO - Need to figure out how to get character to eat
     @Then("Glutton eats the food")
     public void gluttonEatsTheFood() {
         List<Adventurer> adventurers = world.polymorphia.getLivingAdventurers();
         Adventurer specifiedAdventurer = adventurers.find { it.name == adventurerName }
         world.polymorphia
         specifiedAdventurer.doAction()
-
     }
+
+    // TODO - Need to figure out how to check the room for foor
+    @Then("Glutton does not eat the food")
+    public void gluttonDoesNotEatTheFood() {
+        List<Adventurer> adventurers = world.polymorphia.getLivingAdventurers();
+        Adventurer specifiedAdventurer = adventurers.find { it.name == adventurerName }
+        world.polymorphia
+        specifiedAdventurer.doAction()
+    }
+
+    @Then("the Coward runs")
+    public void theCowardRuns() {
+        // TODO - Implement this
+    }
+
+    @And("all characters are in the same room")
+    public void allCharactersAreInTheSameRoom() {
+        // TODO - Implement this
+    }
+
 }
