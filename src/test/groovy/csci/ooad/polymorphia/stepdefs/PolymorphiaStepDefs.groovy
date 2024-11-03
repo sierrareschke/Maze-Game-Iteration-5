@@ -5,6 +5,7 @@ import csci.ooad.polymorphia.characters.Adventurer
 import csci.ooad.polymorphia.characters.Creature
 import csci.ooad.polymorphia.observer.FightObserver
 import csci.ooad.polymorphia.observer.LostHealthObserver
+import io.cucumber.java.en.And
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 
@@ -72,4 +73,22 @@ class PolymorphiaStepDefs {
         lostHealthObserver.reset()
     }
 
+    @Then("the Coward dies")
+    public void cowardDies() {
+
+    }
+
+    @Then("Coward and Creature fight to the death")
+    public void cowardAndCreatureFightToTheDeath() {
+        lostHealthObserver.nameOfCharacterWhoLostHealth()
+    }
+
+    @Then("Glutton eats the food")
+    public void gluttonEatsTheFood() {
+        List<Adventurer> adventurers = world.polymorphia.getLivingAdventurers();
+        Adventurer specifiedAdventurer = adventurers.find { it.name == adventurerName }
+        world.polymorphia
+        specifiedAdventurer.doAction()
+
+    }
 }

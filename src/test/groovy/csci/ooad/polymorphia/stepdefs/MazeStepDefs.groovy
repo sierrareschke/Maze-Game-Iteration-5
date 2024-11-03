@@ -1,8 +1,10 @@
 package csci.ooad.polymorphia.stepdefs
 
+import csci.ooad.polymorphia.Food
 import csci.ooad.polymorphia.Maze
 import csci.ooad.polymorphia.Polymorphia
 import io.cucumber.java.Before
+import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 
@@ -90,6 +92,14 @@ class MazeStepDefs {
 
         System.out.println("Add character with name")
 
+    }
+
+    @And(/^there is a Food "([^"]+)" added to Room "([^"]+)"$/)
+    void addFoodItem(String foodName, String roomName) {
+        println "Food ($foodName) added to ($roomName)"
+        mazeBuilder.addToRoom(roomName, new Food(foodName))
+
+        System.out.println("$foodName added to Room $roomName in the maze")
     }
 
     // Step 2: Finalize maze with .build() after @Given but before @When
