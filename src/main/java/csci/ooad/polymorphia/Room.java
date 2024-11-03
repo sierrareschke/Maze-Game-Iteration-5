@@ -103,7 +103,9 @@ public class Room {
     }
 
     public void enter(Character character) {
-        add(character);
+        Room currentRoom = character.getCurrentLocation();
+        currentRoom.remove(character);
+        this.add(character);
     }
 
     public List<Character> getLivingCharacters() {

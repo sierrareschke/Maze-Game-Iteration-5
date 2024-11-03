@@ -4,7 +4,9 @@ import csci.ooad.polymorphia.EventType
 import csci.ooad.polymorphia.characters.Adventurer
 import csci.ooad.polymorphia.characters.Creature
 import csci.ooad.polymorphia.observer.AteFoodObserver
+import csci.ooad.polymorphia.observer.DeathObserver
 import csci.ooad.polymorphia.observer.FightObserver
+import csci.ooad.polymorphia.observer.GameOverObserver
 import csci.ooad.polymorphia.observer.LostHealthObserver
 import csci.ooad.polymorphia.observer.MovedObserver
 import io.cucumber.java.en.And
@@ -20,6 +22,8 @@ class PolymorphiaStepDefs {
     LostHealthObserver lostHealthObserver = new LostHealthObserver()
     AteFoodObserver ateFoodObserver = new AteFoodObserver()
     MovedObserver moveObserver = new MovedObserver();
+    DeathObserver deathObserver = new DeathObserver();
+    GameOverObserver gameOverObserver = new GameOverObserver()
 
 
     PolymorphiaStepDefs(World aWorld) {
@@ -28,12 +32,19 @@ class PolymorphiaStepDefs {
         world.polymorphia.attach(lostHealthObserver,EventType.LostHealth)
         world.polymorphia.attach(ateFoodObserver,EventType.AteSomething)
         world.polymorphia.attach(moveObserver,EventType.Moved)
+        world.polymorphia.attach(deathObserver,EventType.Death)
+        world.polymorphia.attach(gameOverObserver,EventType.GameOver)
     }
 
 
     @When("I play the game in the created maze")
     void iPlayTheGame() {
         world.polymorphia.play();
+    }
+
+    @When("a turn of gameplay takes place")
+    void playTurn() {
+        world.polymorphia.playTurn()
     }
 
     @When("adventurer {string} executes his turn")
@@ -57,14 +68,15 @@ class PolymorphiaStepDefs {
 
     @Then("all characters fight")
     public void allCharactersFight() {
-        // TODO - Need to figure out how to check that all characters fought
+        int numDeaths = deathObserver.getNumDeaths()
         assertTrue(fightObserver.hasFightOccurred(), "Expected a fight to have taken place, but no fight was observed.")
+        assertEquals(world.polymorphia.getLivingAdventurers().size() + numDeaths,fightObserver.getNumFights(),"Expected number of fights equal to number of living characters.")
         fightObserver.reset();
     }
 
     @Then("I should be told that either all the adventurers or all of the creatures have died")
     void iShouldBeToldThatEitherAllTheAdventurersOrAllOfTheCreaturesHaveDied() {
-        // Implement me
+        assertTrue(gameOverObserver.receivedGameOverMessage())
     }
 
     @Then("the game should be over")
@@ -79,31 +91,18 @@ class PolymorphiaStepDefs {
     }
 
 
-    @Then("creature lost some health")
-    public void creatureLostSomeHealth() {
-        String characterWithLostHealth = lostHealthObserver.getNameOfCharacterWhoLostHealth()
-        assertTrue(characterWithLostHealth != null)
-        lostHealthObserver.reset()
+    @Then("{string} dies")
+    public void characterDies(String characterName) {
+        assertTrue(deathObserver.getDeadCharacters().contains(characterName))
     }
 
-    @Then("the Coward dies")
-    public void cowardDies() {
 
-    }
-
-    @Then("Coward and Creature fight to the death")
-    public void cowardAndCreatureFightToTheDeath() {
-        lostHealthObserver.nameOfCharacterWhoLostHealth()
-    }
-
-    // TODO - Need to figure out how to get character to eat
     @Then("{string} eats the food")
     public void gluttonEatsTheFood(String adventurerName) {
         assertEquals(adventurerName, ateFoodObserver.getNameOfCharacterWhoAteFood(), "Expected '$adventurerName' to have eaten food, but it did not.")
         ateFoodObserver.reset();
     }
 
-    // TODO - Need to figure out how to check the room for foor
     @Then("{string} does not eat the food")
     public void gluttonDoesNotEatTheFood(String adventurerName) {
         assertNotEquals(adventurerName, ateFoodObserver.getNameOfCharacterWhoAteFood(), "Expected '$adventurerName' to have not eaten food, but it did.")
@@ -120,9 +119,10 @@ class PolymorphiaStepDefs {
         moveObserver.reset()
     }
 
-    @And("all characters are in the same room")
-    public void allCharactersAreInTheSameRoom() {
-        // TODO - Implement this
+    @Then("there should be at least {int} deaths")
+    public validateDeathCount(int minDeaths){
+        assertTrue(deathObserver.getNumDeaths() >= minDeaths)
     }
+
 
 }

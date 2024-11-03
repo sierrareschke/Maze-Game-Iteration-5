@@ -13,7 +13,7 @@ public class Glutton extends Adventurer {
 
     @Override
     Boolean shouldFight() {
-        if (!getCurrentLocation().hasDemon() && getCurrentLocation().hasFood()) {
+        if (!getCurrentLocation().hasDemon() && !getCurrentLocation().hasFood()) {
             return false;
         }
         return super.shouldFight();

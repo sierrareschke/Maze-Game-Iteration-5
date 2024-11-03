@@ -1,5 +1,4 @@
-Feature: # Enter feature name here
-  # Enter feature description here
+Feature: Test gameplay outcomes
 
     Scenario: Play a complicated game
       Given I have a maze with the following attributes:
@@ -19,30 +18,16 @@ Feature: # Enter feature name here
       And the game should be over
 
 
-    Scenario: Coward will fight a Creature if he cannot run away
-      Given a room named "Only Room" with 0 neighbors
-      And a Coward "Sir Run Away"
-      And a Creature "Ogre"
-      And all characters are in room "Only Room"
-      And the maze is successfully created
 
-      When adventurer "Sir Run Away" executes his turn
-
-      Then a fight took place
-      And creature "Ogre" lost some health
-
-    Scenario: Coward will fight a Creature if he cannot run away - version 2
+    Scenario: Deaths should be properly tracked assuming Adventurers die
       Given I have a maze with the following attributes:
-        | number of rooms       | 1 |
-        | number of creatures   | 1 |
-      And a Coward "Sir Run Away"
+        | number of rooms       | 3 |
+        | number of adventurers | 3 |
+        | number of demons      | 20 |
       And the maze is successfully created
 
-      When adventurer "Sir Run Away" executes his turn
+      When I play the game in the created maze
 
-      Then a fight took place
-      And creature lost some health
-
-
-      # TODO - that the maze observer is notified of the correct number of death events
-
+      Then I should be told that either all the adventurers or all of the creatures have died
+      And the game should be over
+      And there should be at least 3 deaths

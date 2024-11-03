@@ -80,7 +80,7 @@ class MazeStepDefs {
 
         // Move each character to the specified room
         allCharacters.each { character ->
-            targetRoom.add(character)
+            targetRoom.enter(character)
         }
 
         println("All characters have been placed in room: $roomName")

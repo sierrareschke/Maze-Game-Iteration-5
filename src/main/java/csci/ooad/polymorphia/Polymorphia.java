@@ -117,6 +117,7 @@ public class Polymorphia implements IMazeSubject, IObservable {
     }
 
     public void play() {
+        postMessage(EventType.GameStart, "The game has started.");
         while (!isOver()) {
             logger.info(this.toString());
             playTurn();
@@ -129,7 +130,7 @@ public class Polymorphia implements IMazeSubject, IObservable {
         } else {
             eventDescription += "No team won! Everyone died!\n";
         }
-        postMessage(EventType.GameStart, eventDescription);
+        postMessage(EventType.GameOver, eventDescription);
     }
 
     String getAdventurerNames() {

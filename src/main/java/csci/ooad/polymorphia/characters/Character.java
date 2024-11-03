@@ -141,8 +141,11 @@ public abstract class Character implements Comparable<Character> {
         }
     }
 
+
     protected void gainHealth(double healthValue) {
         this.health += healthValue;
         logger.info("{} gained health: {}", getName(), formatter.format(getHealth()));
     }
+
+
 }
