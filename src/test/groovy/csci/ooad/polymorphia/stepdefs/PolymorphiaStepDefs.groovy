@@ -59,6 +59,22 @@ class PolymorphiaStepDefs {
         }
     }
 
+    @When("I play the game until all adventurers or all creatures have died")
+    public void iPlayTheGameUntilAllAdventurersOrAllCreaturesHaveDied() {
+        // play the game until over
+        while (!world.polymorphia.isOver()) {
+            world.polymorphia.playTurn();
+        }
+
+    }
+
+    @Then(/the maze observer is notified of at least {int} death events/)
+    public void theMazeObserverIsNotifiedOfTheCorrectNumberOfDeathEvents(int expectedDeaths) {
+        // Assert that the observer recorded the expected number of death events
+        assertTrue(deathObserver.numDeaths >= expectedDeaths);
+        deathObserver.reset();
+    }
+
 
     @Then("a fight took place")
     public void aFightTookPlace() {

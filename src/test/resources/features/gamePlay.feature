@@ -31,3 +31,14 @@ Feature: Test gameplay outcomes
       Then I should be told that either all the adventurers or all of the creatures have died
       And the game should be over
       And there should be at least 3 deaths
+
+
+
+  Scenario: Maze observer is notified of the correct number of death events
+    Given I have a maze with the following attributes:
+      | number of rooms       | 3 |
+      | number of adventurers | 3 |
+      | number of creatures   | 2 |
+    And the maze is successfully created
+    When I play the game until all adventurers or all creatures have died
+    Then the maze observer is notified of at least 2 death events

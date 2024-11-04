@@ -94,7 +94,7 @@ Feature: Test Character Gameplay Behaviors
 
   Scenario: Creature is in the same room as an adventurer and fights
     Given a room named "Only Room" with 0 neighbors
-    And a Glutton "Steve"
+    And a Adventurer "Steve"
     And a Creature "Zombie"
     And the maze is successfully created
 
