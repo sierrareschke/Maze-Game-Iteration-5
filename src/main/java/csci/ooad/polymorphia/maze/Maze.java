@@ -72,10 +72,6 @@ public class Maze {
         return Collections.unmodifiableList(characters);
     }
 
-    void addToRandomRoom(Character character) {
-        getRandomRoom().add(character);
-    }
-
     public boolean hasDemon() {
         return rooms.stream().anyMatch(Room::hasDemon);
     }

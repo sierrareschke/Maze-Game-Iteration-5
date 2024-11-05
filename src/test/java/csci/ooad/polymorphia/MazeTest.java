@@ -31,11 +31,11 @@ class MazeTest {
         Maze maze = Maze.getNewBuilder()
                 .create2x2Grid()
                 .createAndAddAdventurers("Frodo")
+                .createAndAddAdventurers("Arwen")
                 .build();
 
         assertTrue(maze.hasLivingAdventurers());
 
-        maze.addToRandomRoom(new Adventurer("Arwen"));
         assertEquals(maze.getLivingAdventurers().size(), 2);
     }
 
@@ -44,10 +44,10 @@ class MazeTest {
         Maze maze = Maze.getNewBuilder()
                 .create2x2Grid()
                 .createAndAddCreatures("Ogre")
+                .createAndAddCreatures("Dragon")
                 .build();
         assertTrue(maze.hasLivingCreatures());
 
-        maze.addToRandomRoom(new Creature("Dragon"));
         assertEquals(maze.getLivingCreatures().size(), 2);
     }
 
