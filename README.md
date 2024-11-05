@@ -21,7 +21,7 @@ The maze and room classes were then also packaged for increased encapsulation. A
 also made to be immutable to increase the protection of the state within the object returning the data.
 
 The BDD tests were split into a game test and a character test. The files are `gamePlay.feature` and `characterDynamics.feature` respectively.
-The observer tests are covered in the `gamePlay.feature` file utlizing maze and polymorphia stepdefs.
+Each type of observer is tested in the `gamePlay.feature` file utilizing maze and polymorphia stepdefs to ensure they are receiving data correctly.
 
 IMPORTANT: You will submit this assignment via a link to your GIT repository. If you are re-using a repository from a previous homework, create a branch called "Homework_6" and commit all changes
 for this assignment into that branch. And turn in a link to this branch.
