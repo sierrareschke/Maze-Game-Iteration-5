@@ -30,8 +30,6 @@ class RoomTest {
         room.add(new Adventurer("Frodo"));
         room.add(new Creature("Ogre"));
 
-        System.out.println(room);
-
         assertTrue(room.toString().contains("onlyRoom"));
         assertTrue(room.toString().contains("Frodo"));
         assertTrue(room.toString().contains("Ogre"));

@@ -10,7 +10,6 @@ public class FightObserver implements IObserver {
     public void update(String eventDescription) {
         fightOccurred = true;
         numFights++;
-        System.out.println("Fight event observed: " + eventDescription);
     }
 
     public boolean hasFightOccurred() {

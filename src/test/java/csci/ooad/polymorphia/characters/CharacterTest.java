@@ -20,7 +20,6 @@ class CharacterTest {
 
     @Test
     void testToString() {
-        System.out.println(joe);
 
         assertTrue(joe.toString().contains("Joe"));
     }
@@ -42,8 +41,6 @@ class CharacterTest {
                 new Adventurer("Arwen", leastHealth)));
 
         Collections.sort(characters);
-
-        System.out.println(characters);
     }
 
     @Test
@@ -59,8 +56,6 @@ class CharacterTest {
     void testFightingMandatoryLossOfHalfAPoint() {
         Creature ogre = new Creature("Ogre");
         joe.fight(ogre);
-        System.out.println("After the fight, Joe's health is: " + joe.getHealth());
-
         // Joe should have lost 0.5 health and he started with a integer health value
         // of 5.0. After the fight he should have 4.5 health. Or 3.5, or 2.5, etc. depending
         // upon the outcome of the fight. So, we just check to make sure the health is x.5

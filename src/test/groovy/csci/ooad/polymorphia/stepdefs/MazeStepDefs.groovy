@@ -22,7 +22,6 @@ class MazeStepDefs {
     @Before(order = 0)
     void setupMazeBuilder() {
         mazeBuilder = Maze.getNewBuilder().create2x2Grid()
-        System.out.println("Setup maze builder")
     }
 
 
@@ -46,13 +45,10 @@ class MazeStepDefs {
                 .createAndAddCreatures(numCreatures)
                 .createAndAddDemons(numDemons)
                 .createAndAddFoodItems(numFoodItems)
-
-        System.out.println("Maze with attributes")
     }
 
     @Given("a room named {string} with {int} neighbors")
     public void createRoomWithNNeighbors(String roomName, int numNeighbors) {
-        System.out.println("Creating room with " + numNeighbors + " neighbors.");
 
         List<String> roomNames = new ArrayList<>();
 
@@ -111,20 +107,13 @@ class MazeStepDefs {
                 mazeBuilder.createAndAddDemons(new String[]{characterName});
                 break;
             default:
-                System.out.println("Unknown character type: " + typeOfCharacter);
                 break;
         }
-
-        System.out.println("Add character with name")
-
     }
 
     @And(/^there is a Food "([^"]+)" added to Room "([^"]+)"$/)
     void addFoodItem(String foodName, String roomName) {
-        println "Food ($foodName) added to ($roomName)"
         mazeBuilder.addToRoom(roomName, new Food(foodName))
-
-        System.out.println("$foodName added to Room $roomName in the maze")
     }
 
     // Step 2: Finalize maze with .build() after @Given but before @When
@@ -132,7 +121,6 @@ class MazeStepDefs {
     void finalizeMaze() {
         maze = mazeBuilder.build();
         world.polymorphia = new Polymorphia("Polymorphia Maze", maze);
-        System.out.println("Finalize maze")
     }
 
 

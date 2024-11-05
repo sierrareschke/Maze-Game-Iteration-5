@@ -54,8 +54,6 @@ class PolymorphiaStepDefs {
 
         if (specifiedAdventurer) {
             specifiedAdventurer.doAction()
-        } else {
-            System.out.println("Adventurer '$adventurerName' not found in the maze")
         }
     }
 

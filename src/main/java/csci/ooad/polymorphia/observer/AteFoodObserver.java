@@ -6,8 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AteFoodObserver implements IObserver {
-    private String nameOfCharacterWhoAteFood;
     private static final Pattern EATING_PATTERN = Pattern.compile("^([\\w\\s]+) just ate ([\\w\\s]+)$");
+    private String nameOfCharacterWhoAteFood;
 
     @Override
     public void update(String eventDescription) {
@@ -17,8 +17,6 @@ public class AteFoodObserver implements IObserver {
         if (matcher.find()) {
             String characterName = matcher.group(1);
             nameOfCharacterWhoAteFood = characterName;
-        } else {
-            System.out.println("Failed to parse event description for lost health.");
         }
     }
 

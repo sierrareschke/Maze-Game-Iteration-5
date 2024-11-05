@@ -8,10 +8,20 @@ Room encapsulation can be done via package protected (not really, as we can add 
 
 NOTE: Expect some minor edits/updates
 
-Introduction
-Team Members:
-Java Version: 21
-Comments/Assumptions: None
+### Introduction
+#### Team Members: 
+Grace Ohlsen, Sierra Reschke and Nolan Brady 
+
+#### Java Version: 21
+
+#### Comments/Assumptions: 
+
+The maze was encapsulated by protecting any method or value within the class that wasn't imperative to expose. 
+The maze and room classes were then also packaged for increased encapsulation. Any method that returned information from the class was
+also made to be immutable to increase the protection of the state within the object returning the data.
+
+The BDD tests were split into a game test and a character test. The files are `gamePlay.feature` and `characterDynamics.feature` respectively.
+The observer tests are covered in the `gamePlay.feature` file utlizing maze and polymorphia stepdefs.
 
 IMPORTANT: You will submit this assignment via a link to your GIT repository. If you are re-using a repository from a previous homework, create a branch called "Homework_6" and commit all changes
 for this assignment into that branch. And turn in a link to this branch.

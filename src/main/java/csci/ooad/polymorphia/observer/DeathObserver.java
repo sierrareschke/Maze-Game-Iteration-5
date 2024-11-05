@@ -7,9 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeathObserver implements IObserver {
+    private static final Pattern DEATH_PATTERN = Pattern.compile("^(.*?) just died!$");
     private int numDeaths = 0;
     private ArrayList<String> deadCharacters;
-    private static final Pattern DEATH_PATTERN = Pattern.compile("^(.*?) just died!$");
 
     public DeathObserver() {
         deadCharacters = new ArrayList<>();
@@ -24,12 +24,9 @@ public class DeathObserver implements IObserver {
             String deadCharacter = matcher.group(1);
             deadCharacters.add(deadCharacter);
             numDeaths++;
-        } else {
-            System.out.println("Failed to parse event description for movement.");
         }
 
         numDeaths++;
-        System.out.println("Death event observed: " + eventDescription);
     }
 
     public int getNumDeaths() {return numDeaths;}

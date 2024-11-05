@@ -91,11 +91,7 @@ public class PolymorphiaTest {
             }
         }
 
-        System.out.println("Adventurers won " + adventurerWins + " and creatures won " + creatureWins);
-        System.out.println("There were " + numTies + " games with no winners");
-
         double adventureWinRatio = (double) adventurerWins / (double) TOTAL_GAMES;
-        System.out.println("Adventures won " + (adventureWinRatio * 100) + "% of the games.");
 
         // Check to see that adventurers win at least 10% of the games
         assertTrue(adventureWinRatio > 0.1);
