@@ -1,17 +1,14 @@
 package csci.ooad.polymorphia;
 
 import csci.ooad.layout.intf.IMazeObserver;
-import csci.ooad.layout.intf.ImageFactory;
 import csci.ooad.layout.intf.MazeObserver;
-import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.Creature;
+import csci.ooad.polymorphia.maze.Maze;
 import csci.ooad.polymorphia.observer.AudibleObserver;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import javax.swing.text.html.parser.Entity;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

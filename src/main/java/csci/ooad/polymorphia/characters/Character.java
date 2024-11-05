@@ -3,7 +3,7 @@ package csci.ooad.polymorphia.characters;
 import csci.ooad.polymorphia.Die;
 import csci.ooad.polymorphia.EventBus;
 import csci.ooad.polymorphia.EventType;
-import csci.ooad.polymorphia.Room;
+import csci.ooad.polymorphia.maze.Room;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,21 +13,15 @@ import static csci.ooad.polymorphia.EventBus.post;
 
 
 public abstract class Character implements Comparable<Character> {
-    private static final Logger logger = LoggerFactory.getLogger(Character.class);
-    private static final DecimalFormat formatter = new DecimalFormat("0.0");
-
     static final Double DEFAULT_INITIAL_HEALTH = 5.0;
     static final Double HEALTH_LOST_IN_FIGHT_REGARDLESS_OF_OUTCOME = 0.5;
     static final Double HEALTH_LOST_IN_MOVING_ROOMS = 0.25;
-
+    private static final Logger logger = LoggerFactory.getLogger(Character.class);
+    private static final DecimalFormat formatter = new DecimalFormat("0.0");
     protected String name;
     private Double health;
 
     private Room currentLocation;
-
-    public Room getCurrentLocation() {
-        return currentLocation;
-    }
 
     public Character(String name) {
         this(name, DEFAULT_INITIAL_HEALTH);
@@ -36,6 +30,10 @@ public abstract class Character implements Comparable<Character> {
     public Character(String name, Double initialHealth) {
         this.name = name;
         this.health = initialHealth;
+    }
+
+    public Room getCurrentLocation() {
+        return currentLocation;
     }
 
     @Override

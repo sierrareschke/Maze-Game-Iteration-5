@@ -1,8 +1,8 @@
 package csci.ooad.polymorphia.observer;
 
 import csci.ooad.layout.intf.IMaze;
-import csci.ooad.polymorphia.Maze;
-import csci.ooad.polymorphia.Room;
+import csci.ooad.polymorphia.maze.Maze;
+import csci.ooad.polymorphia.maze.Room;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

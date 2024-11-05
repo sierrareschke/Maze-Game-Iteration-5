@@ -1,13 +1,12 @@
 package csci.ooad.polymorphia.stepdefs
 
 import csci.ooad.polymorphia.Food
-import csci.ooad.polymorphia.Maze
+import csci.ooad.polymorphia.maze.Maze
 import csci.ooad.polymorphia.Polymorphia
-import csci.ooad.polymorphia.Room
+import csci.ooad.polymorphia.maze.Room
 import io.cucumber.java.Before
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
-import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 
 class MazeStepDefs {

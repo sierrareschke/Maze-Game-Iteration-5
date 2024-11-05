@@ -1,5 +1,8 @@
-package csci.ooad.polymorphia;
+package csci.ooad.polymorphia.maze;
 
+import csci.ooad.polymorphia.Die;
+import csci.ooad.polymorphia.Food;
+import csci.ooad.polymorphia.NoFoodException;
 import csci.ooad.polymorphia.characters.Adventurer;
 import csci.ooad.polymorphia.characters.Creature;
 import csci.ooad.polymorphia.characters.Character;
@@ -7,7 +10,6 @@ import csci.ooad.polymorphia.characters.Character;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Collections.*;
 

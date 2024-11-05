@@ -2,6 +2,7 @@ package csci.ooad.polymorphia;
 
 import csci.ooad.polymorphia.characters.Adventurer;
 import csci.ooad.polymorphia.characters.Creature;
+import csci.ooad.polymorphia.maze.Room;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

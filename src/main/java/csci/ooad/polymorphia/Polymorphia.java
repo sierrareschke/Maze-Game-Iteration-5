@@ -6,6 +6,7 @@ import csci.ooad.layout.intf.IMazeSubject;
 import csci.ooad.polymorphia.characters.Adventurer;
 import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.Creature;
+import csci.ooad.polymorphia.maze.Maze;
 import csci.ooad.polymorphia.observer.MazeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +19,19 @@ import java.util.Random;
 public class Polymorphia implements IMazeSubject, IObservable {
     private static final Logger logger = LoggerFactory.getLogger(Polymorphia.class);
     private static int gameNumber = 1;
-
+    private final String name;
+    private final Maze maze;
+    private final Random rand = new Random();
     List<IMazeObserver> observers = new ArrayList<>();
+    private Integer turnCount = 0;
+    public Polymorphia(Maze maze) {
+        this("Polymorphia Game " + gameNumber, maze);
+    }
+    public Polymorphia(String name, Maze maze) {
+        this.name = name;
+        this.maze = maze;
+        gameNumber++;
+    }
 
     public void attach(IMazeObserver observer) {
         observers.add(observer);
@@ -29,22 +41,6 @@ public class Polymorphia implements IMazeSubject, IObservable {
     public List<IMazeObserver> getObservers() {
         return observers;
     }
-
-    private final String name;
-    private final Maze maze;
-    private Integer turnCount = 0;
-    private final Random rand = new Random();
-
-    public Polymorphia(Maze maze) {
-        this("Polymorphia Game " + gameNumber, maze);
-    }
-
-    public Polymorphia(String name, Maze maze) {
-        this.name = name;
-        this.maze = maze;
-        gameNumber++;
-    }
-
 
     String getName() {
         return name;

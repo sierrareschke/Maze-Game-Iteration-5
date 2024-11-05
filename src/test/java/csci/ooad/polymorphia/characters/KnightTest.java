@@ -1,6 +1,6 @@
 package csci.ooad.polymorphia.characters;
 
-import csci.ooad.polymorphia.Maze;
+import csci.ooad.polymorphia.maze.Maze;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

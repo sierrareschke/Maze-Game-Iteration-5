@@ -3,7 +3,7 @@ package csci.ooad.polymorphia.characters;
 import csci.ooad.polymorphia.EventType;
 import csci.ooad.polymorphia.Food;
 import csci.ooad.polymorphia.NoFoodException;
-import csci.ooad.polymorphia.Room;
+import csci.ooad.polymorphia.maze.Room;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

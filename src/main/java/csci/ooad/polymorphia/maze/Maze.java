@@ -1,12 +1,14 @@
-package csci.ooad.polymorphia;
+package csci.ooad.polymorphia.maze;
 
+import csci.ooad.polymorphia.Food;
+import csci.ooad.polymorphia.FoodFactory;
+import csci.ooad.polymorphia.NoSuchRoomException;
 import csci.ooad.polymorphia.characters.Adventurer;
 import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.CharacterFactory;
 import csci.ooad.polymorphia.characters.Creature;
 
 import java.util.*;
-import java.util.concurrent.locks.Condition;
 
 
 public class Maze {
@@ -15,6 +17,14 @@ public class Maze {
     private List<Room> rooms = new ArrayList<>();
 
     public Maze() {
+    }
+
+    public static Builder getNewBuilder() {
+        return new Builder();
+    }
+
+    public static Builder getNewBuilder(CharacterFactory characterFactory, FoodFactory foodFactory) {
+        return new Builder(characterFactory, foodFactory);
     }
 
     public int size() {
@@ -66,14 +76,6 @@ public class Maze {
         getRandomRoom().add(character);
     }
 
-    public static Builder getNewBuilder() {
-        return new Builder();
-    }
-
-    public static Builder getNewBuilder(CharacterFactory characterFactory, FoodFactory foodFactory) {
-        return new Builder(characterFactory, foodFactory);
-    }
-
     public boolean hasDemon() {
         return rooms.stream().anyMatch(Room::hasDemon);
     }
@@ -90,6 +92,14 @@ public class Maze {
         return namedRoom.get();
     }
 
+    private void addRoom(Room aRoom) {
+        rooms.add(aRoom);
+    }
+
+    public List<Room> getRooms() {
+        return Collections.unmodifiableList(rooms);
+    }
+
     public static class Builder {
         private final static String[] NAMES = new String[]{
                 "Rivendell", "Mordor", "BagEnd", "Swamp", "Crystal Palace", "Pool of Lava",
@@ -104,9 +114,28 @@ public class Maze {
 
         private final CharacterFactory characterFactory;
         final private FoodFactory foodFactory;
-
+        private final Maze maze = new Maze();
+        private final Map<String, Room> roomMap = new HashMap<>();
         private Boolean distributeSequentially = false;
         private int currentRoomIndex = -1;  // This is incremented before any use
+
+        Builder() {
+            this(new CharacterFactory(), new FoodFactory());
+        }
+        private Builder(CharacterFactory characterFactory, FoodFactory foodFactory) {
+            this.characterFactory = characterFactory;
+            this.foodFactory = foodFactory;
+        }
+
+        private static String[] createRoomNames(Integer numRooms) {
+            // Room names must be unique, as the maze drawer uses them as keys to connect rooms
+            String[] roomNames = new String[numRooms];
+            int roomNameIndex = (new Random()).nextInt(NAMES.length);
+            for (int i = 0; i < numRooms; i++) {
+                roomNames[i] = NAMES[(roomNameIndex + i) % NAMES.length];
+            }
+            return roomNames;
+        }
 
         private Room nextRoom() {
             if (distributeSequentially) {
@@ -114,18 +143,6 @@ public class Maze {
                 return maze.getRooms().get(currentRoomIndex);
             }
             return maze.getRandomRoom();
-        }
-
-        Builder() {
-            this(new CharacterFactory(), new FoodFactory());
-        }
-
-        private final Maze maze = new Maze();
-        private final Map<String, Room> roomMap = new HashMap<>();
-
-        private Builder(CharacterFactory characterFactory, FoodFactory foodFactory) {
-            this.characterFactory = characterFactory;
-            this.foodFactory = foodFactory;
         }
 
         public Builder createRoom(String name) {
@@ -174,16 +191,6 @@ public class Maze {
         public Builder createFullyConnectedRooms(Integer numRooms) {
             String[] roomNames = createRoomNames(numRooms);
             return createFullyConnectedRooms(roomNames);
-        }
-
-        private static String[] createRoomNames(Integer numRooms) {
-            // Room names must be unique, as the maze drawer uses them as keys to connect rooms
-            String[] roomNames = new String[numRooms];
-            int roomNameIndex = (new Random()).nextInt(NAMES.length);
-            for (int i = 0; i < numRooms; i++) {
-                roomNames[i] = NAMES[(roomNameIndex + i) % NAMES.length];
-            }
-            return roomNames;
         }
 
         public Builder createFullyConnectedRooms(String... roomNames) {
@@ -369,13 +376,5 @@ public class Maze {
             return this;
         }
 
-    }
-
-    private void addRoom(Room aRoom) {
-        rooms.add(aRoom);
-    }
-
-    public List<Room> getRooms() {
-        return Collections.unmodifiableList(rooms);
     }
 }

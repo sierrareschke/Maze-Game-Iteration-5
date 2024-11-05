@@ -1,7 +1,7 @@
 package csci.ooad.polymorphia.characters;
 
 import csci.ooad.polymorphia.Food;
-import csci.ooad.polymorphia.Room;
+import csci.ooad.polymorphia.maze.Room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package csci.ooad.polymorphia.characters;
 
 import csci.ooad.polymorphia.Food;
-import csci.ooad.polymorphia.Maze;
+import csci.ooad.polymorphia.maze.Maze;
 import csci.ooad.polymorphia.NoSuchRoomException;
 import org.junit.jupiter.api.Test;
 
