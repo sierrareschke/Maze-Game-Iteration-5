@@ -1,12 +1,7 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/MktpU50_)
-# OOAD Homework 6:
-## Adding the Encapsulation and BDD to Polymorphia
-#### (55 points)
+## Adding Encapsulation and Behavior-Driven-Design
 
-TODO:
 Room encapsulation can be done via package protected (not really, as we can add any class to that package), an inner class of the Maze (so that we can use the private methods), or we can make the objects immutable (return deep copy of Maze), or have the Maze handle the contents of each room internally.
 
-NOTE: Expect some minor edits/updates
 
 ### Introduction
 #### Team Members: 
@@ -23,41 +18,16 @@ also made to be immutable to increase the protection of the state within the obj
 The BDD tests were split into a game test and a character test. The files are `gamePlay.feature` and `characterDynamics.feature` respectively.
 Each type of observer is tested in the `gamePlay.feature` file utilizing maze and polymorphia stepdefs to ensure they are receiving data correctly.
 
-IMPORTANT: You will submit this assignment via a link to your GIT repository. If you are re-using a repository from a previous homework, create a branch called "Homework_6" and commit all changes
-for this assignment into that branch. And turn in a link to this branch.
-
-## Grading Rubric:
-
-### Deductions
-
-    NOTE: for this assignment you do NOT need to worry about method coverage and you do NOT need to submit a screenshot of the coverage
-
-* Meaningful names for everything: variables, methods, classes, interfaces, etc. (1% off for each bad name, up to 10% total)
-* No "magic" numbers or strings (1% off for each one, up to 10%)
-* No System.out.println() calls anywhere in your main code – replace with logging (see below) or eliminate outright. 1% off for each System.out.println statement in src/main/java code.
-* 1% deduction for each missing required addition to the README.md (game outputs, screenshots, diagrams)
-
-### Method Construction Possible Deductions (max is listed under Required Capabilities)
-
-Methods should be:
-* "short" -- with very few exceptions all methods should fit on a screen using a readable font.
-* well named (duh).
-* properly denoted as instance methods vs. static methods (static methods don't reference the _this_ pointer).
-* limited complexity (level of indentation due to control structures).
-* not have comments that could be turned into just as readable code.
-
-All of this can be achieved through functional decomposition of more complicated methods (see lecture on October 2nd).
-
 ### Required Capabilities
 
-* Encapsulate your maze object. (10 points)
-* Create a new TestObserver (5 points)
-* Write BDD tests that test: (20 points)
+* Encapsulate your maze object.
+* Create a new TestObserver 
+* Write BDD tests that test: 
   * Implement the BDD tests in the repository
   * a maze can be built with any number of adventurers, knights, cowards, gluttons, creatures, demons, and food
   * that the behavior of the glutton, coward, knight, demon, creature, and adventurer is correct
   * that the maze observer is notified of the correct number of death events
-* Create step definitions to implement these tests. You must use at least two separate step definition files.(20 points)
+* Create step definitions to implement these tests. You must use at least two separate step definition files.
 
 ## Encapsulation
 
